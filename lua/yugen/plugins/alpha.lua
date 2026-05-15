@@ -506,9 +506,9 @@ return {
         })
       end),
       dashboard.button("SPC t", "λ > Terminal", "<cmd>lua require('FTerm').open()<CR>"),
+      dashboard.button("SPC s", "λ > Sections", "<cmd>lua require('persistence').select()<CR>"),
       -- dashboard.button("SPC g", "λ > Git", '<cmd>lua require("FTerm").scratch({cmd="lazygit"})<CR>'),
       -- dashboard.button("SPC m", "λ > Mail", '<cmd>lua require("FTerm").scratch({cmd="neomutt"})<CR>'),
-      -- dashboard.button("SPC m", "λ > Mail", ':Himalaya<CR>'),
       dashboard.button("q", "λ > Quit NVIM", ":qa<CR>"),
     }
 
