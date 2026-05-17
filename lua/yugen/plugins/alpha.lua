@@ -500,13 +500,13 @@ return {
       dashboard.button("SPC .", "λ > File Browser", ":lua require('oil').open_float()<CR>"),
       dashboard.button("SPC f", "λ > Find file", ":Telescope find_files<CR>"),
       dashboard.button("SPC r", "λ > Recent", ":Telescope oldfiles<CR>"),
-      dashboard.button("SPC n", "λ > Nvim config", function ()
+      dashboard.button("SPC n", "λ > Nvim config", function()
         require("telescope.builtin").find_files({
           cwd = vim.fn.stdpath("config"),
         })
       end),
       dashboard.button("SPC t", "λ > Terminal", ":lua require('FTerm').open()<CR>"),
-      dashboard.button("SPC s", "λ > Sections", ":lualua require('persistence').select()<CR>"),
+      dashboard.button("SPC s", "λ > Sections", ":lua require('persistence').select()<CR>"),
       -- dashboard.button("SPC g", "λ > Git", '<cmd>lua require("FTerm").scratch({cmd="lazygit"})<CR>'),
       -- dashboard.button("SPC m", "λ > Mail", '<cmd>lua require("FTerm").scratch({cmd="neomutt"})<CR>'),
       dashboard.button("q", "λ > Quit NVIM", ":qa<CR>"),

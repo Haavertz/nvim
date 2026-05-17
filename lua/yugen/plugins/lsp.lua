@@ -149,7 +149,7 @@ return {
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("pyright")
       vim.lsp.enable("emmet_language_server")
-      vim.lsp.enable("sqls")
+      -- vim.lsp.enable("sqls")
 
     end, 
   }
