@@ -33,4 +33,14 @@ return {
       end, { desc = "Stop persistence" })
     end,
   },
+  {
+    "jiaoshijie/undotree",
+    opts = {
+      -- ignore_filetype = {},
+      parser = "compact"
+    },
+    keys = {
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
 }

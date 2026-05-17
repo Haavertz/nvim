@@ -37,6 +37,8 @@ vim.keymap.set("n", "<leader>sh", "<C-w>v", { desc = "Split window horizontally"
 vim.keymap.set("n", "<leader>sv", "<C-w>s", { desc = "Split window vertically" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) 
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close current split" })
+vim.keymap.set("n", "<leader>.", function() require("oil").open_float() end, { desc = "Open parent directory" })
+
 vim.keymap.set("n", "Q", "<nop>")
 
 vim.api.nvim_set_hl(0, "yugen", {
