@@ -9,7 +9,7 @@ return {
   end,
   config = function()
     require("bearded").setup({
-        flavor = "black-&-amethyst", -- any flavor slug
+        flavor = "arc-blueberry", -- any flavor slug
         transparent = false,
         bold = true,
         italic = true,

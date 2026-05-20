@@ -96,6 +96,10 @@ return {
         },
       })
 
+      -- eslint
+      vim.lsp.config("eslint", {})
+      vim.lsp.enable("eslint")
+
       -- pyright
       vim.lsp.config("pyright", {
         settings = {
@@ -134,24 +138,28 @@ return {
               syntaxProfiles = {},
               variables = {},
           },
-      }) 
-      
-      -- slqs
-      vim.lsp.config('sqls', {
-        settings = {
-          sqls = {},
-        },
       })
+
+      -- html
+      vim.lsp.config("html", {})
+
+      -- cssls
+      vim.lsp.config("cssls", {})
+
+      -- ts_ls
+      vim.lsp.config("ts_ls", {})
 
 
       -- LSP Enable
-
       vim.lsp.enable("lua_ls")
       vim.lsp.enable("pyright")
       vim.lsp.enable("emmet_language_server")
-      -- vim.lsp.enable("sqls")
 
-    end, 
+      vim.lsp.enable("html")
+      vim.lsp.enable("cssls")
+      vim.lsp.enable("ts_ls")
+
+    end,
   }
 }
 
