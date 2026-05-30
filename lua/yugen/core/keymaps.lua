@@ -40,17 +40,3 @@ vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close current spli
 vim.keymap.set("n", "<leader>.", function() require("oil").open_float() end, { desc = "Open parent directory" })
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, { desc = "Format file" })
 vim.keymap.set("n", "Q", "<nop>")
-
-vim.api.nvim_set_hl(0, "yugen", {
-  bg = "#00002a",                     -- bg
-  fg = "#ffffff",                     -- fg
-})
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight on yank",
-  callback = function()
-    vim.hl.on_yank({
-      higroup = "Visual",
-      timeout = 200
-    })
-  end,
-})
