@@ -26,7 +26,7 @@ return {
       telescope.load_extension("fzf")
 
       local builtin = require("telescope.builtin")
-      vim.keymap.set('n', '<leader>p', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>pp', builtin.live_grep, {})
+      vim.keymap.set('n', '<leader>p', builtin.find_files, { desc = "Find files" })
+      vim.keymap.set('n', '<leader>pp', builtin.live_grep, { desc = "Live grep" })
   end,
 }

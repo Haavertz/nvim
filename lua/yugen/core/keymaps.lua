@@ -1,7 +1,5 @@
 -- sudo pacman -S xclip
 
-local opts = { noremap = true, silent = true }
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -31,12 +29,12 @@ vim.keymap.set("n", "<leader><leader>", ":Alpha<CR>", { desc = "Open Alpha" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "move down in buffer with cursor centered" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "move up in buffer with cursor centered" })
 vim.keymap.set("n", "<C-c>", ":noh<CR>", { desc = "Clear search hl", silent = true })
-vim.keymap.set("v", "<", "<gv", opts) -- indent with select text
-vim.keymap.set("v", ">", ">gv", opts)
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left", noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right", noremap = true, silent = true })
 vim.keymap.set("n", "<leader>sh", "<C-w>v", { desc = "Split window horizontally" })
 vim.keymap.set("n", "<leader>sv", "<C-w>s", { desc = "Split window vertically" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close current split" })
 vim.keymap.set("n", "<leader>.", function() require("oil").open_float() end, { desc = "Open parent directory" })
 vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, { desc = "Format file" })
-vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "Q", "<nop>", { desc = "Disabled" })

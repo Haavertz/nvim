@@ -40,7 +40,7 @@ return {
       parser = "compact"
     },
     keys = {
-      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>", desc = "Toggle undo tree" },
     },
   },
   {
@@ -48,7 +48,7 @@ return {
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {},
-    key = {
+    keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
       { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesit" },
       { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },

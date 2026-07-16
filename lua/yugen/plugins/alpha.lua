@@ -497,7 +497,6 @@ return {
 
     dashboard.section.buttons.val = {
       dashboard.button("SPC e", "λ > New file", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("SPC .", "λ > File Browser", ":lua require('oil').open_float()<CR>"),
       dashboard.button("SPC f", "λ > Find file", ":Telescope find_files<CR>"),
       dashboard.button("SPC r", "λ > Recent", ":Telescope oldfiles<CR>"),
       dashboard.button("SPC n", "λ > Nvim config", function()
@@ -505,10 +504,8 @@ return {
           cwd = vim.fn.stdpath("config"),
         })
       end),
-      dashboard.button("SPC t", "λ > Terminal", ":lua require('FTerm').open()<CR>"),
-      dashboard.button("SPC s", "λ > Sections", ":lua require('persistence').select()<CR>"),
       -- dashboard.button("SPC g", "λ > Git", '<cmd>lua require("FTerm").scratch({cmd="lazygit"})<CR>'),
-      -- dashboard.button("SPC m", "λ > Mail", '<cmd>lua require("FTerm").scratch({cmd="neomutt"})<CR>'),
+      dashboard.button("SPC h", "λ > Help Keys", ":lua require('which-key').show({ global = false })<CR>"),
       dashboard.button("q", "λ > Quit NVIM", ":qa<CR>"),
     }
 
