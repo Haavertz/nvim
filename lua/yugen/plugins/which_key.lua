@@ -5,6 +5,8 @@ return {
     spec = {
       { "<leader>s", group = "Splits" },
       { "<leader>q", group = "Sessions" },
+      { "<leader>d", group = "Debug" },
+      { "<leader>j", group = "Java" },
     },
   },
   keys = {

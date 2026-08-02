@@ -11,7 +11,14 @@ return {
         },
     },
     config = function()
-        require('mason').setup()
+        require("mason").setup()
+
+        vim.api.nvim_create_user_command("YugenInstallJava", function()
+          vim.cmd("MasonInstall jdtls java-debug-adapter java-test google-java-format")
+        end, {
+          desc = "Install Java LSP, debugger, tests, and formatter",
+          force = true,
+        })
     end,
   },
   {
@@ -69,6 +76,33 @@ return {
       local capabilities = require("blink.cmp").get_lsp_capabilities()
       vim.lsp.config('*', {
             capabilities = capabilities,
+      })
+
+      local lsp_keymaps = vim.api.nvim_create_augroup("YugenLspKeymaps", { clear = true })
+      vim.api.nvim_create_autocmd("LspAttach", {
+        group = lsp_keymaps,
+        callback = function(event)
+          local function map(lhs, rhs, desc)
+            vim.keymap.set("n", lhs, rhs, { buffer = event.buf, desc = desc })
+          end
+
+          map("gd", vim.lsp.buf.definition, "Go to definition")
+          map("gD", vim.lsp.buf.declaration, "Go to declaration")
+          map("gr", vim.lsp.buf.references, "Find references")
+          map("gi", vim.lsp.buf.implementation, "Go to implementation")
+          map("K", vim.lsp.buf.hover, "Show documentation")
+          map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+          map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+          map("<leader>f", function()
+            vim.lsp.buf.format({ async = true })
+          end, "Format file")
+          map("[d", function()
+            vim.diagnostic.jump({ count = -1, float = true })
+          end, "Previous diagnostic")
+          map("]d", function()
+            vim.diagnostic.jump({ count = 1, float = true })
+          end, "Next diagnostic")
+        end,
       })
 
       -- local augroup = vim.api.nvim_create_augroup("LspDiagnosticsHold", { clear = true })
@@ -162,4 +196,3 @@ return {
     end,
   }
 }
-
