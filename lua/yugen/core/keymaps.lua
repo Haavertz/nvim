@@ -36,5 +36,4 @@ vim.keymap.set("n", "<leader>sv", "<C-w>s", { desc = "Split window vertically" }
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close current split" })
 vim.keymap.set("n", "<leader>.", function() require("oil").open_float() end, { desc = "Open parent directory" })
-vim.keymap.set("n", "<leader>f", function() vim.lsp.buf.format() end, { desc = "Format file" })
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disabled" })

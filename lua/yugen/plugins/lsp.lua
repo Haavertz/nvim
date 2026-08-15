@@ -1,3 +1,5 @@
+local lsp_manager = require("yugen.lsp_manager")
+
 return {
   {
     "mason-org/mason.nvim",
@@ -10,15 +12,9 @@ return {
             },
         },
     },
-    config = function()
-        require("mason").setup()
-
-        vim.api.nvim_create_user_command("YugenInstallJava", function()
-          vim.cmd("MasonInstall jdtls java-debug-adapter java-test google-java-format")
-        end, {
-          desc = "Install Java LSP, debugger, tests, and formatter",
-          force = true,
-        })
+    config = function(_, opts)
+        require("mason").setup(opts)
+        lsp_manager.setup_install_commands()
     end,
   },
   {
@@ -132,17 +128,14 @@ return {
 
       -- eslint
       vim.lsp.config("eslint", {})
-      vim.lsp.enable("eslint")
 
       -- pyright
       vim.lsp.config("pyright", {
         settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "vim" },
-            }, 
-            completion = {
-              callSnippet = "Replace",
+          python = {
+            analysis = {
+              autoSearchPaths = true,
+              useLibraryCodeForTypes = true,
             },
           }
         }
@@ -182,16 +175,7 @@ return {
 
       -- ts_ls
       vim.lsp.config("ts_ls", {})
-
-
-      -- LSP Enable
-      vim.lsp.enable("lua_ls")
-      vim.lsp.enable("pyright")
-      vim.lsp.enable("emmet_language_server")
-
-      vim.lsp.enable("html")
-      vim.lsp.enable("cssls")
-      vim.lsp.enable("ts_ls")
+      vim.lsp.enable(lsp_manager.lsp_names())
 
     end,
   }

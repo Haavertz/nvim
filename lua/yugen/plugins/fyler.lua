@@ -6,11 +6,21 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
-    { "<leader>e", "<Cmd>Fyler<CR>", desc = "Open Fyler View" },
+    {
+      "<leader>e",
+      function()
+        require("fyler").toggle()
+      end,
+      desc = "Toggle left file explorer",
+    },
   },
   opts = {
-    win = {
-      kind = "split_right",
+    views = {
+      finder = {
+        win = {
+          kind = "split_left_most",
+        },
+      },
     },
   },
 }
