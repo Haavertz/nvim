@@ -1,7 +1,6 @@
 return {
   "A7Lavinraj/fyler.nvim",
   branch = "stable",
-  lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
@@ -15,6 +14,9 @@ return {
     },
   },
   opts = {
+    integrations = {
+      icon = "nvim_web_devicons",
+    },
     views = {
       finder = {
         win = {

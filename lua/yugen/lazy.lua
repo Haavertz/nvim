@@ -17,7 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup(
   {
     { import = "yugen.plugins" },
-    -- { import = "yugen.plugins.lsp" },
   },
   {
     checker = {
@@ -29,4 +28,3 @@ require("lazy").setup(
     },
   }
 )
-

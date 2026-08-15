@@ -1,0 +1,20 @@
+{
+  "0": "Java Tooling",
+  "1": "LSP Tool Registry",
+  "2": "LSP Completion Setup",
+  "3": "Neovim Entry Point",
+  "4": "Editor Keymaps",
+  "5": "Lazy Plugin Loader",
+  "6": "Dashboard",
+  "7": "Auto Pairs",
+  "8": "Theme",
+  "9": "Debug Adapter",
+  "10": "File Sidebar",
+  "11": "Indentation Guides",
+  "12": "Live Server",
+  "13": "Status Line",
+  "14": "Productivity Tools",
+  "15": "Telescope Search",
+  "16": "Treesitter Parsing",
+  "17": "Which Key Hints"
+}

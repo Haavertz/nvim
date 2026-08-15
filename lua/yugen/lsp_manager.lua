@@ -40,8 +40,14 @@ function M.lsp_names()
   return names
 end
 
-function M.mason_package_names(kind)
-  return package_names(kind)
+function M.prepend_mason_bin()
+  local mason_bin = vim.fs.joinpath(vim.fn.stdpath("data"), "mason", "bin")
+  local path = vim.env.PATH or ""
+  local entries = vim.split(path, ":", { plain = true })
+
+  if vim.fn.isdirectory(mason_bin) == 1 and not vim.tbl_contains(entries, mason_bin) then
+    vim.env.PATH = mason_bin .. ":" .. path
+  end
 end
 
 local function install_missing(package_list, command_name)

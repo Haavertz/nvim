@@ -1,5 +1,3 @@
--- sudo pacman -S xclip
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -11,8 +9,8 @@ vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.expandtab = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.breakindent = true
 vim.opt.smartindent = true
@@ -31,9 +29,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "move up in buffer with cursor 
 vim.keymap.set("n", "<C-c>", ":noh<CR>", { desc = "Clear search hl", silent = true })
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left", noremap = true, silent = true })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>sh", "<C-w>v", { desc = "Split window horizontally" })
-vim.keymap.set("n", "<leader>sv", "<C-w>s", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 vim.keymap.set("n", "<leader>sc", "<cmd>close<CR>", { desc = "Close current split" })
-vim.keymap.set("n", "<leader>.", function() require("oil").open_float() end, { desc = "Open parent directory" })
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disabled" })

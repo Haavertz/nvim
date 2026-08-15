@@ -1,80 +1,94 @@
 local lsp_manager = require("yugen.lsp_manager")
 
+local function format_buffer(bufnr)
+  local clients = vim.lsp.get_clients({
+    bufnr = bufnr,
+    method = vim.lsp.protocol.Methods.textDocument_formatting,
+  })
+
+  if #clients == 0 then
+    vim.notify("No LSP formatter is available for this buffer", vim.log.levels.WARN)
+    return
+  end
+
+  local priority = {
+    eslint = 1,
+    jdtls = 2,
+    lua_ls = 3,
+    ts_ls = 100,
+  }
+
+  table.sort(clients, function(left, right)
+    local left_priority = priority[left.name] or 50
+    local right_priority = priority[right.name] or 50
+
+    if left_priority == right_priority then
+      return left.id < right.id
+    end
+
+    return left_priority < right_priority
+  end)
+
+  vim.lsp.buf.format({
+    async = true,
+    bufnr = bufnr,
+    id = clients[1].id,
+  })
+end
+
 return {
   {
     "mason-org/mason.nvim",
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonUninstall",
+      "MasonUpdate",
+      "MasonLog",
+      "YugenInstallTools",
+      "YugenInstallJava",
+    },
     opts = {
-        ui = {
-            icons = {
-                package_installed = "✓",
-                package_pending = "➜",
-                package_uninstalled = "✗"
-            },
+      ui = {
+        icons = {
+          package_installed = "✓",
+          package_pending = "➜",
+          package_uninstalled = "✗",
         },
+      },
     },
     config = function(_, opts)
-        require("mason").setup(opts)
-        lsp_manager.setup_install_commands()
+      require("mason").setup(opts)
+      lsp_manager.setup_install_commands()
     end,
   },
   {
-    'saghen/blink.cmp',
-    dependencies = { 'rafamadriz/friendly-snippets' },
-    version = '1.*',
-    build = "cargo build --release",
+    "saghen/blink.cmp",
+    version = "1.*",
+    event = { "InsertEnter", "CmdlineEnter" },
+    dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
-      
-      -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
-
-        ["<Tab>"] = { "select_next", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-
+        preset = "default",
+        ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
         ["<CR>"] = { "accept", "fallback" },
-
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-
         ["<C-e>"] = { "hide", "fallback" },
-
         ["<C-n>"] = { "select_next", "fallback" },
         ["<C-p>"] = { "select_prev", "fallback" },
       },
-
-
-      appearance = {
-        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-        nerd_font_variant = 'mono'
-      },
-
-      completion = {
-        trigger = {
-          show_on_keyword = true,
-          show_on_trigger_character = true,
-        },
-        documentation = {
-          auto_show = false,
-        },
-      },
-
-      sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
-      },
-
-      fuzzy = { implementation = "prefer_rust_with_warning" }
     },
-    opts_extend = { "sources.default" }
   },
   {
     "neovim/nvim-lspconfig",
+    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "saghen/blink.cmp" },
-
     config = function()
-      local capabilities = require("blink.cmp").get_lsp_capabilities()
-      vim.lsp.config('*', {
-            capabilities = capabilities,
-      })
+      lsp_manager.prepend_mason_bin()
 
       local lsp_keymaps = vim.api.nvim_create_augroup("YugenLspKeymaps", { clear = true })
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = lsp_keymaps,
         callback = function(event)
@@ -90,7 +104,7 @@ return {
           map("<leader>ca", vim.lsp.buf.code_action, "Code action")
           map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
           map("<leader>f", function()
-            vim.lsp.buf.format({ async = true })
+            format_buffer(event.buf)
           end, "Format file")
           map("[d", function()
             vim.diagnostic.jump({ count = -1, float = true })
@@ -101,35 +115,25 @@ return {
         end,
       })
 
-      -- local augroup = vim.api.nvim_create_augroup("LspDiagnosticsHold", { clear = true })
-      -- local virtual_text_enabled = true
-      -- vim.o.updatetime = 350
-
-      -- Configure and enable LSP servers
-      -- lua_ls
       vim.lsp.config("lua_ls", {
         settings = {
-            Lua = {
-                diagnostics = {
-                    globals = { "vim" },
-                },
-                completion = {
-                    callSnippet = "Replace",
-                },
-                workspace = {
-                    library = {
-                        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                        [vim.fn.stdpath("config") .. "/lua"] = true,
-                    },
-                },
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
             },
+            completion = {
+              callSnippet = "Replace",
+            },
+            workspace = {
+              library = {
+                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                [vim.fn.stdpath("config") .. "/lua"] = true,
+              },
+            },
+          },
         },
       })
 
-      -- eslint
-      vim.lsp.config("eslint", {})
-
-      -- pyright
       vim.lsp.config("pyright", {
         settings = {
           python = {
@@ -137,46 +141,11 @@ return {
               autoSearchPaths = true,
               useLibraryCodeForTypes = true,
             },
-          }
-        }
+          },
+        },
       })
 
-      -- emmet_language_server
-      vim.lsp.config("emmet_language_server", {
-          filetypes = {
-              "css",
-              "html",
-              "javascript",
-              "javascriptreact",
-              "less",
-              "sass",
-              "scss",
-              "typescriptreact",
-              "sql",
-          },
-          init_options = {
-              includeLanguages = {},
-              excludeLanguages = {},
-              extensionsPath = {},
-              preferences = {},
-              showAbbreviationSuggestions = true,
-              showExpandedAbbreviation = "always",
-              showSuggestionsAsSnippets = false,
-              syntaxProfiles = {},
-              variables = {},
-          },
-      })
-
-      -- html
-      vim.lsp.config("html", {})
-
-      -- cssls
-      vim.lsp.config("cssls", {})
-
-      -- ts_ls
-      vim.lsp.config("ts_ls", {})
       vim.lsp.enable(lsp_manager.lsp_names())
-
     end,
-  }
+  },
 }

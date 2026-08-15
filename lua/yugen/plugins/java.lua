@@ -159,7 +159,6 @@ local function start_jdtls(bufnr)
     name = "jdtls",
     cmd = { cmd, "-data", workspace_dir },
     root_dir = root_dir,
-    capabilities = require("blink.cmp").get_lsp_capabilities(),
     settings = {
       java = {
         eclipse = { downloadSources = true },
