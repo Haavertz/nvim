@@ -1,4 +1,24 @@
-local M = {}
+local M = {
+  "mason-org/mason.nvim",
+  cmd = {
+    "Mason",
+    "MasonInstall",
+    "MasonUninstall",
+    "MasonUpdate",
+    "MasonLog",
+    "YugenInstallTools",
+    "YugenInstallJava",
+  },
+  opts = {
+    ui = {
+      icons = {
+        package_installed = "✓",
+        package_pending = "➜",
+        package_uninstalled = "✗",
+      },
+    },
+  },
+}
 
 M.tools = {
   { kind = "lsp", lsp = "lua_ls", mason = "lua-language-server" },
@@ -104,6 +124,11 @@ function M.setup_install_commands()
     package_names("java"),
     "Install missing Java LSP, debugger, tests, and formatter"
   )
+end
+
+M.config = function(_, opts)
+  require("mason").setup(opts)
+  M.setup_install_commands()
 end
 
 return M

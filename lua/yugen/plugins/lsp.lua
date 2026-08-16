@@ -1,4 +1,4 @@
-local lsp_manager = require("yugen.lsp_manager")
+local lsp_manager = require("yugen.plugins.lsp_manager")
 
 local function format_buffer(bufnr)
   local clients = vim.lsp.get_clients({
@@ -37,31 +37,6 @@ local function format_buffer(bufnr)
 end
 
 return {
-  {
-    "mason-org/mason.nvim",
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUpdate",
-      "MasonLog",
-      "YugenInstallTools",
-      "YugenInstallJava",
-    },
-    opts = {
-      ui = {
-        icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-        },
-      },
-    },
-    config = function(_, opts)
-      require("mason").setup(opts)
-      lsp_manager.setup_install_commands()
-    end,
-  },
   {
     "saghen/blink.cmp",
     version = "1.*",
