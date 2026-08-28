@@ -1,2 +1,2 @@
-require("yugen.core.keymaps")
-require("yugen.lazy")
+require("keymaps")
+require("lazynvim")

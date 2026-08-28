@@ -6,8 +6,8 @@ local M = {
     "MasonUninstall",
     "MasonUpdate",
     "MasonLog",
-    "YugenInstallTools",
-    "YugenInstallJava",
+    "MasonInstallLSPs",
+    "JavaInstall",
   },
   opts = {
     ui = {
@@ -117,12 +117,12 @@ end
 
 function M.setup_install_commands()
   create_install_command(
-    "YugenInstallTools",
+    "MasonInstallLSPs",
     package_names(),
     "Install missing LSP and Java tools from the Yugen registry"
   )
   create_install_command(
-    "YugenInstallJava",
+    "JavaInstall",
     package_names("java"),
     "Install missing Java LSP, debugger, tests, and formatter"
   )

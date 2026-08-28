@@ -1,4 +1,4 @@
-local lsp_manager = require("yugen.plugins.lsp_manager")
+local lsp_manager = require("plugins.lsp_manager")
 
 local function format_buffer(bufnr)
   local clients = vim.lsp.get_clients({
@@ -91,6 +91,47 @@ return {
       })
 
       vim.lsp.config("lua_ls", {
+        root_dir = function(bufnr, on_dir)
+          local path = vim.api.nvim_buf_get_name(bufnr)
+          if path == "" then
+            return
+          end
+
+          path = vim.fs.normalize(path)
+
+          local root = vim.fs.root(path, {
+            ".emmyrc.json",
+            ".luarc.json",
+            ".luarc.jsonc",
+          }) or vim.fs.root(path, {
+            ".luacheckrc",
+            ".stylua.toml",
+            "stylua.toml",
+            "selene.toml",
+            "selene.yml",
+          }) or vim.fs.root(path, { ".git" })
+
+          local home = vim.fs.normalize(vim.uv.os_homedir() or "")
+          if root and vim.fs.normalize(root) == home then
+            root = nil
+          end
+
+          local config_root = vim.fs.normalize(vim.fn.stdpath("config"))
+          if not root and (path == config_root or vim.startswith(path, config_root .. "/")) then
+            root = config_root
+          end
+
+          if not root then
+            local file_directory = vim.fs.dirname(path)
+            if file_directory and vim.fs.normalize(file_directory) ~= home then
+              root = file_directory
+            end
+          end
+
+          if root then
+            on_dir(root)
+          end
+        end,
         settings = {
           Lua = {
             diagnostics = {
