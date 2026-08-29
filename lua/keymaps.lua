@@ -23,8 +23,9 @@ vim.opt.list = false
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.hlsearch = true
 
-
 -- remaps
+
+km("n", "mk", ":lua require('render-markdown').buf_toggle()<CR>")
 km("n", "<leader><leader>", ":Alpha <CR>")
 km("n", "<C-d>", "<C-d>zz")
 km("n", "<C-u>", "<C-u>zz")
