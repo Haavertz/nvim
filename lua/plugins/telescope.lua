@@ -20,11 +20,11 @@ return {
           case_mode = "smart_case",
         },
       },
-      pickers = {
-         colorscheme {
-            enable_preview = true,
-         },
-      },
+      -- pickers = {
+      --    colorscheme {
+      --       enable_preview = true,
+      --    },
+      -- },
       find_files = {
          hidden = true,
          find_command = {

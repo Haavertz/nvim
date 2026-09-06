@@ -492,11 +492,12 @@ return {
 
     local config_dir = vim.fn.fnameescape(vim.fn.stdpath("config"))
     dashboard.section.buttons.val = {
-      dashboard.button("f", "λ > Find file", ":Telescope find_files<CR>"),
-      dashboard.button("p", "λ > Persistence", ":lua require('persistence').select()<CR>"),
-      dashboard.button("r", "λ > Recent", ":Telescope oldfiles<CR>"),
-      dashboard.button("n", "λ > Nvim config", ":Telescope find_files cwd=" .. config_dir .. "<CR>"),
-      dashboard.button("q", "λ > Quit Neovim", ":qa<CR>"),
+      dashboard.button("f", "λ > find file", ":Telescope find_files<CR>"),
+      dashboard.button("p", "λ > persistence", ":lua require('persistence').select()<CR>"),
+      dashboard.button("r", "λ > recent", ":Telescope oldfiles<CR>"),
+      dashboard.button("e", "λ > email", ":Zenvoy <CR>"),
+      dashboard.button("n", "λ > nvim", ":Telescope find_files cwd=" .. config_dir .. "<CR>"),
+      dashboard.button("q", "λ > quit", ":qa<CR>"),
     }
 
     alpha.setup(dashboard.opts)
