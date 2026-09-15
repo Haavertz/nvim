@@ -161,6 +161,12 @@ return {
         },
       })
 
+      vim.lsp.config("qmlls", {
+        -- Prefer Arch's Qt server so it uses the installed Qt libraries and QML modules.
+        cmd = { vim.fn.executable("qmlls6") == 1 and "qmlls6" or "qmlls" },
+        root_markers = { ".qmlls.ini", "CMakeLists.txt", ".git" },
+      })
+
       vim.lsp.enable(lsp_manager.lsp_names())
     end,
   },

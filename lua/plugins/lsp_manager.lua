@@ -30,6 +30,7 @@ M.tools = {
   { kind = "lsp", lsp = "ts_ls", mason = "typescript-language-server" },
   { kind = "lsp", lsp = "gopls", mason = "gopls"},
   { kind = "lsp", lsp = "templ", mason = "templ"},
+  { kind = "lsp", lsp = "qmlls", mason = "qmlls" },
   { kind = "java", mason = "jdtls" },
   { kind = "java", mason = "java-debug-adapter" },
   { kind = "java", mason = "java-test" },

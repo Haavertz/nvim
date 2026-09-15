@@ -30,5 +30,6 @@
   "telescope-ui-select.nvim": { "branch": "master", "commit": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2" },
   "telescope.nvim": { "branch": "master", "commit": "5255aa27c422de944791318024167ad5d40aad20" },
   "typst-preview.nvim": { "branch": "master", "commit": "1c2e19486397be1c580b560fc50ee36abe329c46" },
-  "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" }
+  "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" },
+  "zenvoy": { "branch": "main", "commit": "b38a4c38053adc5f29e3136339d2b33b6447d141" }
 }
