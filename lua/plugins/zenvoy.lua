@@ -3,5 +3,7 @@ return {
     dependencies = {
         "MunifTanjim/nui.nvim",
     },
-    opts = {},
+    opts = {
+       himalaya = { page_size = 100 }
+    },
 }

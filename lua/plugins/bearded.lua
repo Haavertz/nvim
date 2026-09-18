@@ -10,7 +10,6 @@ return {
   end,
 }
 
-
 -- https://github.com/CosecSecCot/cosec-twilight.nvim
 -- return {
 --     "CosecSecCot/cosec-twilight.nvim",
