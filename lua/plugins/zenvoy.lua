@@ -4,6 +4,6 @@ return {
         "MunifTanjim/nui.nvim",
     },
     opts = {
-       himalaya = { page_size = 100 }
+       himalaya = { page_size = 35 }
     },
 }
