@@ -7,13 +7,14 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.clipboard = "unnamedplus"
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 3
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.expandtab = true
-vim.opt.tabstop = 3
-vim.opt.softtabstop = 3
-vim.opt.shiftwidth = 3
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
+vim.opt.shiftwidth = 2
+vim.g.markdown_recommended_style = 0
 vim.opt.breakindent = true
 vim.opt.smartindent = true
 vim.opt.undofile = true
@@ -50,8 +51,4 @@ km("v", ">", ">gv", { noremap = true, silent = true })
 
 -- see error
 km("n", "<leader>e", vim.diagnostic.open_float)
-
--- go to errors
-km("n", "[e", vim.diagnostic.goto_next)
-km("n", "]e", vim.diagnostic.goto_next)
 
